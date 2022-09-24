@@ -11,7 +11,7 @@ import (
 func newRootCmd(stdin io.Reader, stdout io.Writer, stderr io.Writer, args []string) *cobra.Command {
 	cobraCmd := &cobra.Command{
 		Use:   "markdown-cb",
-		Short: "Parses and returns all fenced code blocks within a Markdown file.",
+		Short: "Parses and optionally executes fenced code blocks within a Markdown file.",
 	}
 
 	cobraCmd.PersistentFlags().AddGoFlagSet(flag.CommandLine)
