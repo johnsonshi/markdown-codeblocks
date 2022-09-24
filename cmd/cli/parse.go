@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"os"
+	"os/exec"
 
 	"github.com/spf13/cobra"
 
@@ -15,6 +17,7 @@ type parseCmdOpts struct {
 	stderr         io.Writer
 	inputFilePath  string
 	languageFilter string
+	execute        bool
 }
 
 func newParseCmd(stdin io.Reader, stdout io.Writer, stderr io.Writer, args []string) *cobra.Command {
@@ -39,6 +42,8 @@ func newParseCmd(stdin io.Reader, stdout io.Writer, stderr io.Writer, args []str
 
 	f.StringVarP(&opts.languageFilter, "language-filter", "l", "", "only code blocks that match this language will be parsed")
 
+	f.BoolVarP(&opts.execute, "execute", "e", false, "execute the parsed code blocks")
+
 	return cobraCmd
 }
 
@@ -51,7 +56,26 @@ func (opts *parseCmdOpts) run() error {
 	codeBlocks := parser.ParseMarkdownCodeBlocks(md, opts.languageFilter)
 
 	for _, codeBlock := range codeBlocks {
-		opts.stdout.Write([]byte(codeBlock.Literal))
+		if opts.execute && codeBlock.Language == opts.languageFilter {
+			fmt.Fprintf(opts.stdout, "[*] Executing code block with language: %s\n", codeBlock.Language)
+			fmt.Fprintf(opts.stdout, "[*] Code block:\n%s\n", codeBlock.Literal)
+
+			// Execute code block by calling "<language>" with the code block.
+			cmd := exec.Command(codeBlock.Language, "-c", codeBlock.Literal)
+			cmd.Stdin = opts.stdin
+			cmd.Stdout = opts.stdout
+			cmd.Stderr = opts.stderr
+
+			fmt.Fprint(opts.stdout, "[*] Output:\n")
+			err = cmd.Run()
+			if err != nil {
+				return err
+			}
+
+			fmt.Fprint(opts.stdout, "==============================================\n")
+		} else {
+			opts.stdout.Write([]byte(codeBlock.Literal))
+		}
 	}
 
 	return nil
