@@ -7,9 +7,9 @@ import (
 
 type CodeBlock struct {
 	// The language of the code block.
-	Language string
+	Language string `json:"language"`
 	// The code block's literal content.
-	Literal string
+	Literal string `json:"literal"`
 }
 
 // ParseMarkdownCodeBlocks parses all fenced code blocks within a Markdown file.

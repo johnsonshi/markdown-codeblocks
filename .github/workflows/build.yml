@@ -17,3 +17,6 @@ jobs:
 
       - name: Build CLI
         run: make build-cli
+
+      - name: Run Tests
+        run: make test

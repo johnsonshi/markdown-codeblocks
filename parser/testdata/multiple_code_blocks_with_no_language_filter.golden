@@ -1,0 +1,34 @@
+[
+  {
+    "language": "",
+    "literal": "fenced code block without a specified language\n"
+  },
+  {
+    "language": "ruby",
+    "literal": "fenced code block (ruby)\n"
+  },
+  {
+    "language": "python",
+    "literal": "fenced code block (python)\n"
+  },
+  {
+    "language": "bash",
+    "literal": "echo \"fenced code block (bash)\"\n"
+  },
+  {
+    "language": "",
+    "literal": "another fenced code block without a specified language\n"
+  },
+  {
+    "language": "ruby",
+    "literal": "another fenced code block (ruby)\n"
+  },
+  {
+    "language": "python",
+    "literal": "another fenced code block (python)\n"
+  },
+  {
+    "language": "bash",
+    "literal": "echo \"another fenced code block (bash)\"\n"
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "language": "bash",
+    "literal": "echo \"fenced code block (bash)\"\n"
+  },
+  {
+    "language": "bash",
+    "literal": "echo \"another fenced code block (bash)\"\n"
+  }
+]
