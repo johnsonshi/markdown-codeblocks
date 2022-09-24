@@ -7,16 +7,18 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  build-cli:
+    name: Build CLI
     runs-on: ubuntu-latest
-
     steps:
-
       - uses: actions/checkout@v3
-
       - name: Build CLI
         run: make build-cli
 
+  tests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
       - name: Run Tests
         run: make test
