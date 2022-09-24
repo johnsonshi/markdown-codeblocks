@@ -1,7 +1,7 @@
 .PHONY: build-cli
 build-cli:
-	go build -v -o ./bin/md-cb ./cmd/cli
-	chmod +x ./bin/md-cb
+	go build -v -o ./bin/markdown-codeblocks ./cmd/cli
+	chmod +x ./bin/markdown-codeblocks
 
 .PHONY: test
 test:

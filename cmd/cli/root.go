@@ -10,7 +10,7 @@ import (
 
 func newRootCmd(stdin io.Reader, stdout io.Writer, stderr io.Writer, args []string) *cobra.Command {
 	cobraCmd := &cobra.Command{
-		Use:   "markdown-cb",
+		Use:   "markdown-codeblocks",
 		Short: "Parses and optionally executes fenced code blocks within a Markdown file.",
 	}
 
